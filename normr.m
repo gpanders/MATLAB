@@ -1,10 +1,12 @@
 function [ M ] = normr( M )
-%NORMR Normalize rows of matrix
-%   NORMC(M) normalizes the columns of M to a length of 1
+%NORMR Normalize rows of matrix.
+%   NORMR(M) normalizes the rows of M to a length of 1.
+%
+%   See also NORMC.
 
-for row = 1:size(M, 1)
-    M(row, :) = M(row, :) / norm(M(row, :));
-end
+n = sqrt(sum(M.^2, 2));
+n(n == 0) = 1;
+M = bsxfun(@rdivide, M, n);
 
 end
 
